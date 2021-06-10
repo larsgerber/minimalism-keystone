@@ -1,4 +1,4 @@
-const { Text, Select, Relationship } = require('@keystonejs/fields');
+const { Text, Relationship, Checkbox } = require('@keystonejs/fields');
 const { Markdown } = require('@keystonejs/fields-markdown');
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { CloudinaryImage } = require('@keystonejs/fields-cloudinary-image');
@@ -15,22 +15,19 @@ const postFields = {
     title: {
       type: Text,
       isRequired: true,
+      isUnique: true,
     },
     body: {
       type: Markdown,
       isRequired: true,
     },
-    image: {
-      type: CloudinaryImage,
-      adapter: fileAdapter
-    },
-    status: {
-      type: Select,
-      options: [
-        { value: 'PUBLISHED', label: 'Published' },
-        { value: 'UNPUBLISHED', label: 'Unpublished' },
-      ],
-      defaultValue: 'PUBLISHED',
+    // image: {
+    //   type: CloudinaryImage,
+    //   adapter: fileAdapter,
+    // },
+    publish: {
+      type: Checkbox,
+      isRequired: true
     },
     author: {
       type: Relationship,

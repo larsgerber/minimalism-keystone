@@ -6,6 +6,8 @@ const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const initialiseData = require('./initial-data');
 const dotenv = require('dotenv').config()
 
+const { createdAt, updatedAt } = require('@keystonejs/list-plugins');
+
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const PROJECT_NAME = 'Lars Gerber';
 const adapterConfig = { mongoUri: process.env.MONGO_URI };
@@ -86,6 +88,10 @@ keystone.createList('Post', {
     update: access.userIsAdminOrOwner,
     delete: access.userIsAdminOrOwner,
   },
+  plugins: [
+    createdAt(),
+    updatedAt(),
+  ],
 })
 
 
