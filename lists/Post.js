@@ -1,4 +1,4 @@
-const { Text, Relationship, Checkbox, Virtual } = require('@keystonejs/fields');
+const { Text, Relationship, Checkbox, Virtual, Slug } = require('@keystonejs/fields');
 const { Markdown } = require('@keystonejs/fields-markdown');
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { CloudinaryImage } = require('@keystonejs/fields-cloudinary-image');
@@ -29,9 +29,13 @@ const postFields = {
       isRequired: true,
       isUnique: true,
     },
+    // link: {
+    //   type: Virtual,
+    //   resolver: item => `${slugify(item.title)}`,
+    // },
     link: {
-      type: Virtual,
-      resolver: item => `${slugify(item.title)}`,
+      type: Slug,
+      from: 'title',
     },
     body: {
       type: Markdown,
