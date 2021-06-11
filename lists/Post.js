@@ -1,4 +1,4 @@
-const { Text, Relationship, Checkbox } = require('@keystonejs/fields');
+const { Text, Relationship, Checkbox, Virtual } = require('@keystonejs/fields');
 const { Markdown } = require('@keystonejs/fields-markdown');
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { CloudinaryImage } = require('@keystonejs/fields-cloudinary-image');
@@ -10,12 +10,28 @@ const fileAdapter = new CloudinaryAdapter({
   folder: 'my-keystone-app',
 });
 
+function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+}
+
 const postFields = {
   fields: {
     title: {
       type: Text,
       isRequired: true,
       isUnique: true,
+    },
+    link: {
+      type: Virtual,
+      resolver: item => `${slugify(item.title)}`,
     },
     body: {
       type: Markdown,
@@ -27,7 +43,7 @@ const postFields = {
     // },
     publish: {
       type: Checkbox,
-      isRequired: true
+      isRequired: true,
     },
     author: {
       type: Relationship,
