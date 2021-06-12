@@ -49,12 +49,12 @@ const postFields = {
       type: Checkbox,
       isRequired: true,
     },
-    author: {
-      type: Relationship,
-      ref: 'User',
-      many: false,
-      isRequired: true,
-    },
+    // author: {
+    //   type: Relationship,
+    //   ref: 'User',
+    //   many: false,
+    //   isRequired: true,
+    // },
   },
 }
 
