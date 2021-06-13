@@ -88,12 +88,25 @@ keystone.createList('Post', {
     update: access.userIsAdminOrOwner,
     delete: access.userIsAdminOrOwner,
   },
+  labelField: 'title',
   plugins: [
     createdAt(),
     updatedAt(),
   ],
 })
 
+const ImageSchema = require('./lists/Image')
+
+keystone.createList('Image', {
+  fields: ImageSchema.fields,
+  access: {
+    read: true,
+    create: access.userIsAdminOrOwner,
+    update: access.userIsAdminOrOwner,
+    delete: access.userIsAdminOrOwner,
+  },
+  labelField: 'name',
+})
 
 module.exports = {
   keystone,
