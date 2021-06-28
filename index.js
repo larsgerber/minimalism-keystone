@@ -44,31 +44,46 @@ const userIsAdminOrOwner = auth => {
 const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 
 keystone.createList('User', {
+
   fields: {
-    name: { type: Text },
+    name: {
+      type: Text,
+      access: {
+        read: true,
+        auth: false,
+      }
+    },
     email: {
       type: Text,
       isUnique: true,
+      access: {
+        read: access.userIsAdminOrOwner,
+        update: access.userIsAdminOrOwner,
+        create: access.userIsAdmin,
+        delete: access.userIsAdmin,
+        auth: true,
+      },
     },
     isAdmin: {
       type: Checkbox,
-      // Field-level access controls
-      // Here, we set more restrictive field access so a non-admin cannot make themselves admin.
       access: {
+        read: access.userIsAdminOrOwner,
         update: access.userIsAdmin,
+        create: access.userIsAdmin,
+        delete: access.userIsAdmin,
+        auth: true,
       },
     },
     password: {
       type: Password,
+      access: {
+        read: access.userIsAdminOrOwner,
+        update: access.userIsAdminOrOwner,
+        create: access.userIsAdmin,
+        delete: access.userIsAdmin,
+        auth: true,
+      },
     },
-  },
-  // List-level access controls
-  access: {
-    read: access.userIsAdminOrOwner,
-    update: access.userIsAdminOrOwner,
-    create: access.userIsAdmin,
-    delete: access.userIsAdmin,
-    auth: true,
   },
 });
 

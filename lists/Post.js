@@ -15,7 +15,7 @@ const postFields = {
     body: {
       type: Markdown,
       isRequired: true,
-    },  
+    },
     image: {
       type: Relationship,
       ref: 'Image',
@@ -25,6 +25,12 @@ const postFields = {
       type: Checkbox,
       isRequired: true,
     },
+    authors: {
+      type: Relationship,
+      many: false,
+      ref: 'User',
+      isRequired: true,
+    }
   },
 }
 
