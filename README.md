@@ -8,3 +8,5 @@ yarn dev
 yarn build
 yarn start
 ```
+
+Support me on: [buymeacoffee/larsgerber](https://www.buymeacoffee.com/larsgerber)
