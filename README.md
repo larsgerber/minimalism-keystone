@@ -1,4 +1,4 @@
-# KeystoneJS Backend for blog.larsgerber.ch
+# KeystoneJS backend for blog.larsgerber.ch
 
 ## Running the Project.
 
