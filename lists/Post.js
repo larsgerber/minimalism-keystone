@@ -16,11 +16,11 @@ const postFields = {
       type: Markdown,
       isRequired: true,
     },
-    image: {
-      type: Relationship,
-      ref: 'Image',
-      many: true,
-    },
+    // image: {
+    //   type: Relationship,
+    //   ref: 'Image',
+    //   many: true,
+    // },
     publish: {
       type: Checkbox,
       isRequired: true,

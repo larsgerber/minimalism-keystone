@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    container_name: minimalism-blog-keystone
+    restart: always
+    image: minimalism-blog-app
+    ports:
+      - 8082:8082
+    environment:
+      SERVER_PORT: 8082
+
+  backend:
+    container_name: minimalism-keystone
+    restart: always
+    build: .
+    ports:
+      - 8080:3000
+    environment:
+      MONGO_URI: 'mongodb+srv://lars:<password>@cluster0.csfqz.mongodb.net/test-blog?retryWrites=true&w=majority'
+
+# not working with read only user
+# first visit https://github.com/larsgerber/minimalism-blog/blob/keystone/docker-compose.yml
+# docker compose build --no-cache
+# docker compose up
+# username: lars.gerber@bluewin.ch
+# password: test-blog
